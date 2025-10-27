@@ -8,29 +8,33 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons like checkmark and X -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
-    <!-- Header Section -->
     <header>
         <div class="container">
             <div class="logo">
                 <img src="images/logo-site-2.png" alt="Cartão de TODOS Logo">
             </div>
-            <nav>
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav id="navMenu">
                 <ul>
                     <li><a href="#">Agendar consulta</a></li>
                     <li><a href="#">Agendar Exames</a></li>
                     <li><a href="#">Cartão da Família Soulidari</a></li>
                 </ul>
+                <a href="cadastro.html" class="btn-primary">Faça o seu agendamento!</a>
             </nav>
-           <a href="cadastro.html" class="btn-primary">Faça o seu agendamento!</a>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
             <div class="hero-content">
@@ -67,7 +71,6 @@
         </div>
     </section>
 
-    <!-- Benefits Section -->
     <section class="benefits-section">
         <div class="container">
             <h2>Um cartão, muitas economias:</h2>
@@ -89,12 +92,12 @@
                 </div>
             </div>
         </div>
-        
     </section>
+   
    <div class="agendamento">
           <a href="cadastro.html" class="btn-primary">Faça o seu agendamento!</a>
     </div>
-    <!-- Pricing Section -->
+
     <section class="pricing-section">
         <div class="container">
             <h2>Escolha as consultas e exames ideais para você</h2>
@@ -134,53 +137,49 @@
                     <div class="check-icon"><i class="fa-solid fa-check"></i></div>
                     <div class="check-icon"><i class="fa-solid fa-check"></i></div>
                 </div>
-                
             </div>
             <p class="pricing-disclaimer">*em clínicas e farmácias parceiras</p>
-            <div class="pricing-actions"><a href="cadastro.html" class="btn-secondary popular">Quero Agendar</a> 
+            <div class="pricing-actions">
+                <a href="cadastro.html" class="btn-secondary popular">Quero Agendar</a> 
             </div>
         </div>
     </section>
-<!-- Adicione o EmailJS SDK no HEAD -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-<!-- Contact/Form Section -->
-<section class="contact-section">
-    <div class="container">
-        <div class="contact-text">
-            <h2>O cartão que cuida de você e da sua família</h2>
-            <p>Preencha rapidinho e garanta saúde acessível para você e sua família por <span class="highlight-price">só R$49,90/mês</span></p>
-        </div>
-        <div class="contact-form">
-            <form id="contactForm">
-                <div class="form-group">
-                    <label for="name">Nome*</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">E-mail*</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group whatsapp-group">
-                    <label for="whatsapp">Whatsapp*</label>
-                    <div class="input-group">
-                        <select name="country-code" id="country-code">
-                            <option value="+55">BR +55</option>
-                        </select>
-                        <input type="tel" id="whatsapp" name="whatsapp" required>
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-text">
+                <h2>O cartão que cuida de você e da sua família</h2>
+                <p>Preencha rapidinho e garanta saúde acessível para você e sua família por <span class="highlight-price">só R$49,90/mês</span></p>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nome*</label>
+                        <input type="text" id="name" name="name" required>
                     </div>
-                </div>
-                <div class="form-group checkbox-group">
-                    <input type="checkbox" id="consent" name="consent" required>
-                    <label for="consent">Concordo em fornecer meus dados para receber conteúdos e ofertas por e-mail ou outros meios.</label>
-                </div>
-                <button type="submit" class="btn-secondary">Quero meus benefícios</button>
-            </form>
+                    <div class="form-group">
+                        <label for="email">E-mail*</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group whatsapp-group">
+                        <label for="whatsapp">Whatsapp*</label>
+                        <div class="input-group">
+                            <select name="country-code" id="country-code">
+                                <option value="+55">BR +55</option>
+                            </select>
+                            <input type="tel" id="whatsapp" name="whatsapp" required>
+                        </div>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <label for="consent">Concordo em fornecer meus dados para receber conteúdos e ofertas por e-mail ou outros meios.</label>
+                    </div>
+                    <button type="submit" class="btn-secondary">Quero meus benefícios</button>
+                </form>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-    <!-- Testimonials Section -->
     <section class="testimonials-section">
         <div class="container">
             <p class="section-tag">DEPOIMENTOS</p>
@@ -214,7 +213,6 @@
         </div>
     </section>
 
-    <!-- Footer Section -->
     <footer>
         <div class="container">
             <div class="footer-logo">
@@ -235,6 +233,29 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>

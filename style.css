@@ -6,10 +6,10 @@
 }
 
 :root {
-    --primary-blue: #1d70a7; /* Darker green for background, based on visual analysis */
+    --primary-blue: #1d70a7;
     --secondary-blue: #003169;
-    --light-blue: #87acf1; /* Bright green from logo/card */
-    --bright-blue: #8ebbf7; /* Bright green from logo/card */
+    --light-blue: #87acf1;
+    --bright-blue: #8ebbf7;
     --orange: #ff5722;
     --dark-teal: #00084d;
     --light-gray: #b0bec5;
@@ -31,7 +31,7 @@ body {
     padding: 0 20px;
 }
 
-/* Header Styles - UPDATED */
+/* Header Styles */
 header {
     background-color: var(--primary-blue);
     padding: 15px 0;
@@ -46,6 +46,7 @@ header .container {
     justify-content: space-between;
     align-items: center;
     padding: 0 40px;
+    position: relative;
 }
 
 header .logo {
@@ -63,6 +64,37 @@ header .logo img {
     height: 60px;
 }
 
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--white);
+    margin: 3px 0;
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+/* Hamburger Animation */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Navigation Styles */
 header nav {
     flex-grow: 1;
     display: flex;
@@ -142,7 +174,6 @@ header nav ul li a:hover {
     line-height: 1.2;
     margin-bottom: 20px;
     margin-top: -25px;
-    
 }
 
 .hero-content p {
@@ -183,7 +214,7 @@ header nav ul li a:hover {
 }
 
 .btn-secondary:hover {
- background-color: var(--orange);
+    background-color: var(--orange);
     transform: translateY(-2px);
 }
 
@@ -207,7 +238,7 @@ header nav ul li a:hover {
     justify-content: flex-start;
     gap: 60px;
     margin-top: 5px;
-    position: static; /* Remove absolute positioning */
+    position: static;
     background: none;
     flex-direction: row;
     padding: 0;
@@ -308,81 +339,11 @@ header nav ul li a:hover {
     line-height: 1.6;
 }
 
-/* Sonhos Section */
-.sonhos-section {
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-green) 100%);
-    color: var(--white);
-    padding: 80px 0;
+.agendamento {
     text-align: center;
-}
-
-.sonhos-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 50px;
-    color: var(--bright-blue);
-}
-
-.sonhos-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-    margin-bottom: 50px;
-}
-
-.sonhos-list {
-    text-align: left;
-}
-
-.sonhos-list h3 {
-    color: #ffc107;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-}
-
-.sonhos-list ul {
-    list-style: none;
-    font-size: 1.2rem;
-}
-
-.sonhos-list ul li {
-    margin-bottom: 15px;
-    padding-left: 30px;
-    position: relative;
-}
-
-.sonhos-list ul li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: var(--bright-blue);
-    font-weight: 700;
-    font-size: 1.5rem;
-}
-
-.sonhos-image {
-    position: relative;
-}
-
-.sonhos-image img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 20px;
-}
-
-.sonhos-image .disclaimer {
-    font-size: 0.8rem;
-    color: var(--light-gray);
-    margin-top: 10px;
-}
-
-.sonhos-section h3 {
-    font-size: 2rem;
-    margin-bottom: 30px;
-}
-
-.sonhos-section h3 .highlight {
-    color: var(--bright-blue);
+    background-color: var(--primary-blue);
+    padding: 20px 0;
+    color: var(--light-blue);
 }
 
 /* Pricing Section */
@@ -402,18 +363,17 @@ header nav ul li a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: -105px; /* Pull the image up */
+    margin-bottom: -105px;
     position: relative;
     z-index: 10;
 }
 
 .person-with-card-img {
-    width: 340px; /* Adjust size as needed */
+    width: 340px;
     height: auto;
-    /* The image is positioned to the left of the table */
     position: absolute;
-    left: 30%; /* Adjust to position correctly */
-    top: -135px; /* Adjust to position correctly */
+    left: 30%;
+    top: -135px;
     transform: translateX(-50%);
 }
 
@@ -452,7 +412,7 @@ header nav ul li a:hover {
 
 .plan-card .plan-price {
     background-color: var(--primary-blue);
-     color: var(--black);
+    color: var(--black);
 }
 
 .plan-card.popular .plan-price {
@@ -525,14 +485,6 @@ header nav ul li a:hover {
     font-size: 1.5rem;
     color: var(--light-blue);
 }
-.agendamento {
-    text-align: center;
-  
-    color: var(--light-blue);
-}
-.check-icon.fail i {
-    color: #ff5252;
-}
 
 .pricing-disclaimer {
     text-align: center;
@@ -558,20 +510,24 @@ header nav ul li a:hover {
 }
 
 .pricing-table {
-    margin-top: 100px; /* Make space for the image */
+    margin-top: 100px;
 }
 
 /* Contact Section */
 .contact-section {
     background-color: var(--primary-blue);
-    padding: 20px 0 40px 0; /* Reduzi o padding-top de 80px para 40px */
+    padding: 20px 0 40px 0;
     color: var(--white);
 }
 
 .contact-section .container {
-    gap: 20px; /* Reduzir o gap entre o texto e o formulário */
+    gap: 20px;
     max-width: 40%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
 }
+
 .contact-text h2 {
     font-size: 2rem;
     color: var(--secondary-blue);
@@ -593,9 +549,9 @@ header nav ul li a:hover {
 
 .contact-form {
     background-color: var(--light-gray);
-    padding: 20px; /* Reduzi de 40px para 30px */
+    padding: 20px;
     border-radius: 20px;
-    margin-top: 0; /* Garantir que não há margin extra */
+    margin-top: 0;
 }
 
 .form-group {
@@ -603,8 +559,10 @@ header nav ul li a:hover {
 }
 
 .form-group label {
-    font-size: 0.9rem; /* Reduzi um pouco a fonte dos labels */
+    font-size: 0.9rem;
     margin-bottom: 5px;
+    display: block;
+    color: var(--text-dark);
 }
 
 .form-group input,
@@ -646,7 +604,7 @@ header nav ul li a:hover {
 .contact-form button {
     width: 100%;
     margin-top: 15px;
-     padding: 12px; /* Reduzi o padding do botão */
+    padding: 12px;
     font-size: 0.9rem;
 }
 
@@ -674,7 +632,7 @@ header nav ul li a:hover {
 
 .testimonial-grid {
     display: grid;
-    grid-template-columns: repeat(3, 3fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 40px;
 }
 
@@ -816,81 +774,244 @@ footer .container {
 }
 
 @media (max-width: 768px) {
-    .pricing-header-content {
-        margin-bottom: 0;
-    }
-    .person-with-card-img {
-        position: static;
-        transform: none;
-        margin-bottom: 20px;
-    }
-    .pricing-table {
-        margin-top: 20px;
-    }
+    /* Header Mobile */
     header .container {
-        flex-direction: column;
-        gap: 20px;
         padding: 0 20px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    header nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--primary-blue);
+        display: none;
+        flex-direction: column;
+        padding: 20px 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header nav.active {
+        display: flex;
     }
 
     header nav ul {
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
         text-align: center;
         max-width: 100%;
-        
+        padding: 0;
     }
 
+    header nav ul li {
+        margin: 0;
+    }
+
+    header nav ul li a {
+        margin-left: 0;
+        padding: 12px 20px;
+        display: block;
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        margin-top: 15px;
+        text-align: center;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Hero Section Mobile */
     .hero-section .container {
         grid-template-columns: 1fr;
         grid-template-areas:
             "content"
             "image"
             "stats";
+        gap: 30px;
+        text-align: center;
     }
 
     .hero-content h1 {
         font-size: 2rem;
+        margin-top: 0;
+    }
+
+    .hero-image img {
+        transform: rotate(0deg);
+        max-width: 100%;
     }
 
     .hero-stats {
-        position: static;
-        margin-top: 40px;
-        flex-direction: column;
+        margin-bottom: 0;
         gap: 30px;
+        flex-direction: column;
+    }
+
+    .hero-stats .stat .number {
+        font-size: 2.5rem;
+    }
+
+    /* Benefits Section Mobile */
+    .benefits-section h2 {
+        font-size: 2rem;
+        padding: 0 20px;
     }
 
     .benefits-grid {
         grid-template-columns: 1fr;
+        gap: 60px;
+        padding: 0 20px;
     }
 
-    .sonhos-content {
-        grid-template-columns: 1fr;
+    .benefit-card {
+        margin: 0 10px;
+    }
+
+    /* Pricing Section Mobile */
+    .pricing-section h2 {
+        margin-bottom: 50px;
+        font-size: 1.8rem;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .pricing-header-content {
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .person-with-card-img {
+        position: static;
+        transform: none;
+        margin-bottom: 20px;
+        width: 280px;
+        height: auto;
+    }
+
+    .pricing-table {
+        margin-top: 20px;
     }
 
     .table-header,
     .table-row {
         grid-template-columns: 1fr;
+        text-align: center;
+        gap: 15px;
+        padding: 15px;
     }
 
+    .empty-cell {
+        display: none;
+    }
+
+    .plan-card {
+        margin-bottom: 10px;
+    }
+
+    /* Contact Section Mobile */
     .contact-section .container {
-        grid-template-columns: 1fr;
+        max-width: 100%;
+        padding: 0 20px;
+        display: flex;
+        flex-direction: column;
         gap: 30px;
+        grid-template-columns: 1fr;
+    }
+
+    .contact-text {
+        text-align: center;
+        order: 1;
+    }
+
+    .contact-text h2 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    .contact-text p {
+        font-size: 1rem;
+        margin-top: 10px;
     }
 
     .contact-form {
-        max-width: 50%; /* Em mobile ocupa toda largura */
+        order: 2;
+        max-width: 100%;
+        margin-top: 0;
+        padding: 25px 20px;
     }
 
+    .agendamento {
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .agendamento .btn-primary {
+        display: inline-block;
+        margin: 10px auto;
+    }
+
+    /* Testimonials Mobile */
     .testimonial-grid {
         grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 20px;
     }
 
+    .testimonials-section h2 {
+        font-size: 2rem;
+        padding: 0 20px;
+    }
+
+    /* Footer Mobile */
     footer .container {
         grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 0 20px;
+        text-align: center;
     }
 
-    .pricing-actions {
-        flex-direction: column;
+    .footer-logo {
+        justify-content: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .benefits-section h2 {
+        font-size: 1.6rem;
+    }
+    
+    .pricing-section h2 {
+        font-size: 1.5rem;
+    }
+    
+    .contact-text h2 {
+        font-size: 1.5rem;
+    }
+    
+    .testimonials-section h2 {
+        font-size: 1.6rem;
+    }
+    
+    .hero-stats .stat .number {
+        font-size: 2rem;
+    }
+    
+    .person-with-card-img {
+        width: 250px;
     }
 }
