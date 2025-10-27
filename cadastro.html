@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Cartão da Família Soulidari</title>
+    <link rel="stylesheet" href="cadastro-style.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <div class="cadastro-container">
+        <div class="logo">
+            <img src="images/logo-site-2.png" alt="Cartão da Família Logo">
+        </div>
+
+        <div class="progress-bar">
+            <div class="step active" data-step="1">
+                <span class="circle">1</span>
+                <span class="label">CADASTRO</span>
+            </div>
+            <div class="line" id="line-1"></div>
+            <div class="step" data-step="2">
+                <span class="circle">2</span>
+                <span class="label">ENDEREÇO</span>
+            </div>
+            <div class="line" id="line-2"></div>
+            <div class="step" data-step="3">
+                <span class="circle">3</span>
+                <span class="label">PAGAMENTO</span>
+            </div>
+        </div>
+        
+        <form id="cadastroForm" action="https://formspree.io/f/movpaajw" method="POST">
+            
+            <input type="hidden" name="_next" id="formspree-redirect-url" value="">
+
+            <div class="form-step active" data-step="1">
+                <div class="cadastro-section">
+                    <h2>Cadastro</h2>
+                    <p>Vamos realizar seu cadastro, preencha os campos abaixo</p>
+                    <p class="required-fields">Campos obrigatórios *</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome">Nome completo*</label>
+                            <input type="text" id="nome" name="nome" placeholder="ex. Maria Lucia Almeida" value="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail*</label>
+                            <input type="email" id="email" name="email" placeholder="ex. ana@gmail.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="whatsapp">WhatsApp*</label>
+                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="ex. (11) 99999-9999" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cpf">CPF*</label>
+                            <input type="text" id="cpf" name="cpf" placeholder="ex. 123.456.78" value="" required>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="termos" name="termos" required>
+                        <label for="termos">Li e aceito os <a href="#">termos e condições</a>, sou maior de 18 anos*</label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="comunicacao" name="comunicacao">
+                        <label for="comunicacao">Autorizo o envio de comunicações do Cartão da Família por canais digitais</label>
+                    </div>
+                    
+                    <button type="button" class="btn-next" data-next-step="2">Próximo passo</button>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="2">
+                <div class="cadastro-section">
+                    <h2>Endereço</h2>
+                    <p>Precisamos do seu endereço para envio do cartão</p>
+                    <p class="required-fields">Campos obrigatórios *</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cep">CEP*</label>
+                            <input type="text" id="cep" name="cep" placeholder="ex. 01001-000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="estado">Estado*</label>
+                            <input type="text" id="estado" name="estado" placeholder="ex. SP" readonly required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cidade">Cidade*</label>
+                            <input type="text" id="cidade" name="cidade" placeholder="ex. São Paulo" readonly required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bairro">Bairro*</label>
+                            <input type="text" id="bairro" name="bairro" placeholder="ex. Sé" readonly required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full-width-field">
+                            <label for="rua">Rua/Avenida*</label>
+                            <input type="text" id="rua" name="rua" placeholder="ex. Praça da Sé" readonly required>
+                        </div>
+                        <div class="form-group half-width-field">
+                            <label for="numero">Número*</label>
+                            <input type="text" id="numero" name="numero" placeholder="ex. 123" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="referencia">Ponto de Referência (Opcional)</label>
+                            <input type="text" id="referencia" name="referencia" placeholder="ex. Próximo à padaria">
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn-next" data-next-step="3">Próximo passo</button>
+                    <button type="button" class="btn-back" data-prev-step="1">Voltar ao Cadastro</button>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="3">
+                <div class="cadastro-section">
+                    <h2>Pagamento</h2>
+                    <p>Preencha os dados adicionais para finalizar a adesão</p>
+                    <p class="required-fields">Campos obrigatórios *</p>
+
+                    <div class="form-row info-display">
+                        <div class="form-group">
+                            <label>Nome Completo (Confirmado)</label>
+                            <p id="display-nome" class="display-value"></p>
+                        </div>
+                        <div class="form-group">
+                            <label>CPF (Confirmado)</label>
+                            <p id="display-cpf" class="display-value"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="rg">RG*</label>
+                            <input type="text" id="rg" name="rg" placeholder="ex. 12.345.678-9" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="instalacao">Instalação*</label>
+                            <input type="text" id="instalacao" name="instalacao" placeholder="Código de Instalação" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="parceiro">Parceiro de Negócio*</label>
+                            <input type="text" id="parceiro" name="parceiro" placeholder="Nome do Parceiro" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-next">Finalizar Cadastro e Pagar</button>
+                    <button type="button" class="btn-back" data-prev-step="2">Voltar ao Endereço</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="success-message" id="successMessage">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Cadastro Finalizado com Sucesso!</h2>
+            <p id="success-text">Obrigado por se juntar ao Cartão da Família Soulidari. Seus dados foram enviados para o email tiprimefamilia@gmail.com.</p>
+            <p>Você será redirecionado para a próxima etapa em instantes.</p>
+            <button type="button" class="btn-success" id="returnToStart">Começar Novo Cadastro</button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('cadastroForm');
+            const nomeInput = document.getElementById('nome');
+            const cpfInput = document.getElementById('cpf');
+            const displayNome = document.getElementById('display-nome');
+            const displayCpf = document.getElementById('display-cpf');
+            const whatsappInput = document.getElementById('whatsapp');
+            const cepInput = document.getElementById('cep');
+            const redirectUrlInput = document.getElementById('formspree-redirect-url');
+
+            // Define a URL de redirecionamento do Formspree ao carregar a página
+            // Ele redirecionará para a própria página, mas com o parâmetro ?status=success
+            const currentBaseUrl = window.location.href.split('?')[0];
+            redirectUrlInput.value = currentBaseUrl + '?status=success';
+
+
+            // --- FUNÇÕES DE MÁSCARA (MANTIDAS) ---
+            whatsappInput.addEventListener('input', function (e) {
+                e.target.value = e.target.value.replace(/\D/g, '')
+                    .replace(/^(\d{2})(\d)/g,"($1) $2")
+                    .replace(/(\d{5})(\d)/,"$1-$2")
+                    .replace(/(-\d{4})\d+?$/,"$1");
+            });
+
+            cpfInput.addEventListener('input', function (e) {
+                e.target.value = e.target.value.replace(/\D/g, '')
+                    .replace(/(\d{3})(\d)/, '$1.$2')
+                    .replace(/(\d{3})(\d)/, '$1.$2')
+                    .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+                    .replace(/(-\d{2})\d+?$/, '$1');
+            });
+            
+            cepInput.addEventListener('input', function (e) {
+                e.target.value = e.target.value.replace(/\D/g, '')
+                    .replace(/^(\d{5})(\d)/, '$1-$2')
+                    .replace(/(-\d{3})\d+?$/, '$1');
+            });
+
+            // --- BUSCA DE CEP (MANTIDA) ---
+            cepInput.addEventListener('blur', function() {
+                const cep = cepInput.value.replace(/\D/g, '');
+                if (cep.length === 8) {
+                    document.getElementById('estado').value = '...';
+                    document.getElementById('cidade').value = '...';
+                    document.getElementById('bairro').value = '...';
+                    document.getElementById('rua').value = '...';
+
+                    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (!data.erro) {
+                                document.getElementById('estado').value = data.uf;
+                                document.getElementById('cidade').value = data.localidade;
+                                document.getElementById('bairro').value = data.bairro;
+                                document.getElementById('rua').value = data.logradouro;
+                                document.getElementById('numero').focus();
+                            } else {
+                                alert('CEP não encontrado. Por favor, preencha o endereço manualmente.');
+                                document.getElementById('estado').value = '';
+                                document.getElementById('cidade').value = '';
+                                document.getElementById('bairro').value = '';
+                                document.getElementById('rua').value = '';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erro na busca de CEP:', error);
+                            alert('Erro ao buscar CEP. Tente novamente.');
+                            document.getElementById('estado').value = '';
+                            document.getElementById('cidade').value = '';
+                            document.getElementById('bairro').value = '';
+                            document.getElementById('rua').value = '';
+                        });
+                }
+            });
+
+            // --- CONTROLE DE PASSOS (STEPS) ---
+            const steps = document.querySelectorAll('.form-step');
+            const progressSteps = document.querySelectorAll('.progress-bar .step');
+            // ... (Restante das variáveis)
+            let currentStep = 1; 
+
+            function updateProgress(step) {
+                progressSteps.forEach((s, index) => {
+                    const stepNum = parseInt(s.getAttribute('data-step'));
+                    if (stepNum <= step) {
+                        s.classList.add('active');
+                        // ... (Lógica de linha de progresso)
+                    } else {
+                        s.classList.remove('active');
+                        // ... (Lógica de linha de progresso)
+                    }
+                });
+            }
+
+            function showStep(stepIndex) {
+                steps.forEach(step => {
+                    const stepNum = parseInt(step.getAttribute('data-step'));
+                    if (stepNum === stepIndex) {
+                        step.classList.add('active');
+                    } else {
+                        step.classList.remove('active');
+                    }
+                });
+                currentStep = stepIndex; 
+                updateProgress(currentStep);
+            }
+            
+            function populatePaymentInfo() {
+                displayNome.textContent = nomeInput.value;
+                displayCpf.textContent = cpfInput.value;
+            }
+
+            // Função de Validação do Passo Atual (CORRIGIDA)
+            function validateStep(stepNum) {
+                const validStepNum = parseInt(stepNum);
+
+                if (isNaN(validStepNum) || validStepNum < 1 || validStepNum > 3) {
+                    console.error(`Erro de validação interna: Passo inválido ou não numérico: ${stepNum}`);
+                    return false;
+                }
+
+                const currentStepElement = document.querySelector(`.form-step[data-step="${validStepNum}"]`);
+                
+                if (!currentStepElement) {
+                    console.error(`Erro: Não foi encontrado o elemento para o passo ${validStepNum}.`);
+                    return false;
+                }
+                
+                const requiredInputs = currentStepElement.querySelectorAll('[required]');
+                let isValid = true;
+
+                // Lógica de validação de campos obrigatórios (MANTIDA)
+                requiredInputs.forEach(input => {
+                    if (input.type === 'checkbox' && !input.checked) {
+                        isValid = false;
+                        input.style.outline = '2px solid red'; 
+                    } else if (input.type !== 'checkbox' && input.value.trim() === '') {
+                        isValid = false;
+                        input.style.borderColor = 'red'; 
+                    } else {
+                        input.style.borderColor = ''; 
+                        input.style.outline = ''; 
+                    }
+                });
+                
+                if (!isValid) {
+                    alert('Por favor, preencha todos os campos obrigatórios (*) deste passo.');
+                }
+                return isValid;
+            }
+
+            // Ação para o botão "Próximo passo" (Next)
+            document.querySelectorAll('.btn-next[data-next-step]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const activeStep = parseInt(document.querySelector('.form-step.active').getAttribute('data-step'));
+                    const nextStep = parseInt(button.getAttribute('data-next-step'));
+
+                    if (validateStep(activeStep)) {
+                        if (nextStep === 3) {
+                            populatePaymentInfo();
+                        }
+                        showStep(nextStep);
+                    }
+                });
+            });
+
+            // Ação para o botão "Voltar" (Back)
+            document.querySelectorAll('.btn-back').forEach(button => {
+                button.addEventListener('click', function() {
+                    const prevStep = parseInt(button.getAttribute('data-prev-step'));
+                    showStep(prevStep);
+                });
+            });
+
+            // ATENÇÃO: SUBMISSÃO FINAL (type="submit") FOI REMOVIDA PARA EVITAR O CORS
+            // A validação final agora será feita no HTML nativo (required)
+            
+            // NOVO: Função para verificar e exibir a mensagem de sucesso na URL
+            function checkSuccessStatus() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const status = urlParams.get('status');
+                const successMessage = document.getElementById('successMessage');
+                const cadastroContainer = document.querySelector('.cadastro-container');
+
+                if (status === 'success') {
+                    // Esconde o container principal e mostra a mensagem de sucesso
+                    cadastroContainer.style.display = 'none';
+                    successMessage.style.display = 'flex';
+                    
+                    // Opcional: Tenta pegar o nome do usuário do armazenamento (se foi salvo antes do redirecionamento)
+                    // Como não salvamos antes, vamos usar uma saudação genérica ou pegar o nome do formulário
+                    const nomeFinal = document.getElementById('nome').value;
+                    const nomeDisplay = nomeFinal.trim() !== '' ? nomeFinal : 'cliente';
+                    
+                    document.getElementById('success-text').innerHTML = `Parabéns, <strong>${nomeDisplay}</strong>! Seus dados foram enviados para o email tiprimefamilia@gmail.com.`;
+                
+                    // Limpar a URL para que a mensagem não reapareça em um recarregamento futuro
+                    if (window.history.replaceState) {
+                        window.history.replaceState(null, document.title, window.location.href.split('?')[0]);
+                    }
+                } else {
+                    // Garante que o formulário está visível e começa no passo 1
+                    cadastroContainer.style.display = 'block';
+                    successMessage.style.display = 'none';
+                    showStep(1); 
+                }
+            }
+            
+            // Ação para o botão 'Começar Novo Cadastro' na tela de Sucesso (MANTIDA)
+            const returnToStartButton = document.getElementById('returnToStart');
+            if (returnToStartButton) {
+                returnToStartButton.addEventListener('click', function() {
+                    // Esconde a mensagem de sucesso
+                    document.getElementById('successMessage').style.display = 'none';
+                    
+                    // Exibe o container do formulário novamente
+                    document.querySelector('.cadastro-container').style.display = 'block';
+
+                    // Limpa o formulário e volta ao primeiro passo
+                    form.reset();
+                    showStep(1);
+                });
+            }
+
+            // Inicializa: verifica o status de sucesso na URL ou mostra o Passo 1
+            checkSuccessStatus();
+        });
+    </script>
+</body>
+</html>

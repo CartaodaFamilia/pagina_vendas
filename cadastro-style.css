@@ -1,0 +1,429 @@
+:root {
+    --primary-blue: #1d70a7; /* Azul Principal - Cartão da Família */
+    --secondary-blue: #003169; /* Azul Escuro */
+    --red-accent: #ff5722; /* Vermelho/Laranja de destaque */
+    --step-color: #ff5252; /* Cor mais vermelha para os passos */
+    --text-dark: #333333;
+    --text-light: #f5f5f5;
+    --border-gray: #e0e0e0;
+    --background-light: #f9f9f9;
+    --white: #ffffff;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+    background-color: var(--background-light);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    min-height: 100vh;
+}
+
+.cadastro-container {
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 850px;
+    width: 100%;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo img {
+    max-width: 250px;
+    height: auto;
+}
+
+/* Progress Bar/Steps - ATUALIZADO PARA 3 PASSOS */
+.progress-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding: 0 10px;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    width: 150px; /* Garante que os passos tenham uma largura para espaçamento uniforme */
+}
+
+.step .circle {
+    width: 30px;
+    height: 30px;
+    background-color: var(--border-gray);
+    color: var(--text-dark);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.step.active .circle {
+    background-color: var(--step-color);
+    color: var(--white);
+}
+
+.step .label {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #999;
+    white-space: nowrap;
+    transition: color 0.3s;
+}
+
+.step.active .label {
+    color: var(--step-color);
+}
+
+.line {
+    flex-grow: 1;
+    height: 3px;
+    background-color: var(--border-gray);
+    margin: 0 -10px;
+    transition: background-color 0.3s;
+}
+
+.line.active {
+    background-color: var(--step-color);
+}
+
+/* Form Steps Control */
+.form-step {
+    display: none;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.form-step.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sections - Estilos gerais */
+.cadastro-section {
+    /* Não precisa de border-bottom, pois são passos separados */
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.cadastro-section h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--secondary-blue);
+    margin-bottom: 10px;
+}
+
+.cadastro-section p {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.required-fields {
+    font-size: 0.9rem;
+    color: var(--step-color);
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+/* Form Styles */
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    flex: 1;
+}
+
+/* Ajuste para que a Rua use a maior parte do espaço e o Número seja menor (50% do restante) */
+.form-step[data-step="2"] .form-row:nth-child(4) .form-group:first-child { 
+    flex: 2; /* Rua/Avenida ocupa 2/3 do espaço */
+}
+.form-step[data-step="2"] .form-row:nth-child(4) .form-group:last-child { 
+    flex: 1; /* Número ocupa 1/3 do espaço */
+}
+
+/* Campo Ponto de Referência (Opcional) - Linha 5 */
+.form-step[data-step="2"] .form-row:nth-child(5) .form-group { 
+    flex: 1; /* Ocupa 100% da linha, pois está sozinho */
+}
+
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-gray);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(29, 112, 167, 0.2);
+    outline: none;
+}
+
+.cadastro-section input[readonly] {
+    background-color: var(--background-light);
+    cursor: default;
+}
+
+/* Display de Informações no Passo 3 (Pagamento) */
+.info-display {
+    padding: 10px 0 20px;
+    border-bottom: 1px dashed var(--border-gray);
+    margin-bottom: 25px;
+}
+
+.info-display .display-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--secondary-blue);
+    padding: 10px 15px;
+    background-color: var(--background-light);
+    border-radius: 8px;
+    margin-top: 5px;
+    word-break: break-word;
+}
+
+/* Checkbox Styles (mantidos) */
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    padding: 5px 0;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+    margin-top: 2px;
+    min-width: 16px;
+    min-height: 16px;
+    accent-color: var(--primary-blue);
+}
+
+.checkbox-group label {
+    line-height: 1.4;
+    font-weight: 400;
+    color: var(--text-dark);
+}
+
+.checkbox-group a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+/* Buttons */
+.btn-next, .btn-back {
+    display: block;
+    width: 100%;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+    text-decoration: none;
+}
+
+.btn-next {
+    background-color: var(--red-accent);
+    color: var(--white);
+    box-shadow: 0 4px 10px rgba(255, 87, 34, 0.4);
+}
+
+.btn-next:hover {
+    background-color: #e64a19;
+    transform: translateY(-2px);
+}
+
+/* Botão de Voltar */
+.btn-back {
+    background-color: transparent;
+    border: 2px solid var(--primary-blue);
+    color: var(--primary-blue);
+    font-size: 1rem;
+    margin-top: 10px;
+    box-shadow: none;
+}
+
+.btn-back:hover {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .cadastro-container {
+        padding: 25px;
+    }
+
+    .progress-bar {
+        padding: 0;
+        justify-content: space-between;
+    }
+
+    /* Em mobile, todos os campos ficam em coluna */
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .form-group {
+        flex: 1 1 100%; /* Ocupa 100% da largura em mobile */
+        margin-bottom: 15px;
+    }
+    
+    /* Reseta as regras de largura específicas do desktop para a Rua/Número em mobile */
+    .form-step[data-step="2"] .form-row:nth-child(4) .form-group:first-child,
+    .form-step[data-step="2"] .form-row:nth-child(4) .form-group:last-child {
+        flex: 1 1 100%;
+    }
+    
+    .step .label {
+        font-size: 0.65rem;
+    }
+
+    /* --- ESTILOS PARA A MENSAGEM DE SUCESSO (MODAL) --- */
+.success-message {
+    /* Inicialmente escondida */
+    display: none; 
+    
+    /* Configuração de layout e centralização na tela */
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro */
+    z-index: 2000;
+    
+    /* Centralização do conteúdo */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    /* Estilo do Card Central */
+    padding: 40px 30px;
+    box-sizing: border-box;
+}
+
+.success-message > div, 
+.success-message > h2, 
+.success-message > p, 
+.success-message > button {
+    background-color: var(--white);
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 90%;
+    margin: 10px auto;
+}
+
+.success-icon {
+    font-size: 4rem;
+    color: #4CAF50; /* Verde de sucesso */
+    margin-bottom: 20px;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+.success-message h2 {
+    color: var(--secondary-blue);
+    font-size: 1.8rem;
+    margin-top: -10px;
+}
+
+.success-message p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: var(--text-dark);
+}
+
+/* Botão de Retorno */
+.btn-success {
+    display: block;
+    width: 90%;
+    max-width: 300px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 25px !important;
+    background-color: #4CAF50; /* Cor de sucesso */
+    color: var(--white);
+    transition: background-color 0.3s;
+}
+
+.btn-success:hover {
+    background-color: #45a049;
+}
+
+/* Garante que o container original esteja visível para o JS escondê-lo */
+.cadastro-container {
+    /* Mantenha os estilos existentes aqui */
+    display: block; /* Garante que o JS possa escondê-lo */
+}
+
+/* Media Query para garantir que a mensagem se adapte bem em mobile */
+@media (max-width: 600px) {
+    .success-icon {
+        font-size: 3rem;
+    }
+    .success-message h2 {
+        font-size: 1.5rem;
+    }
+    .success-message p {
+        font-size: 1rem;
+    }
+}
+}
