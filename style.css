@@ -516,96 +516,128 @@ header nav ul li a:hover {
 /* Contact Section */
 .contact-section {
     background-color: var(--primary-blue);
-    padding: 20px 0 40px 0;
+    padding: 80px 0;
     color: var(--white);
 }
 
 .contact-section .container {
-    gap: 20px;
-    max-width: 40%;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 60px;
     align-items: start;
+    max-width: 1200px;
 }
 
 .contact-text h2 {
-    font-size: 2rem;
-    color: var(--secondary-blue);
+    font-size: 2.5rem;
+    color: var(--white);
     margin-bottom: 20px;
+    line-height: 1.2;
 }
 
 .contact-text p {
-    font-size: 1rem;
+    font-size: 1.2rem;
     line-height: 1.8;
     margin-top: 20px;
+    color: var(--light-gray);
 }
 
 .contact-text .highlight-price {
     color: var(--bright-blue);
-    font-weight: 600;
-    text-decoration: underline;
-    margin-bottom: 50px;
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-decoration: none;
 }
 
 .contact-form {
-    background-color: var(--light-gray);
-    padding: 20px;
+    background-color: var(--white);
+    padding: 40px;
     border-radius: 20px;
-    margin-top: 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
-    font-size: 0.9rem;
-    margin-bottom: 5px;
+    font-size: 1rem;
+    margin-bottom: 8px;
     display: block;
     color: var(--text-dark);
+    font-weight: 600;
 }
 
 .form-group input,
 .form-group select {
     width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.9rem;
+    padding: 15px;
+    border: 2px solid var(--light-gray);
+    border-radius: 10px;
+    font-size: 1rem;
     font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-blue);
 }
 
 .whatsapp-group .input-group {
     display: flex;
-    gap: 10px;
+    gap: 15px;
 }
 
 .whatsapp-group select {
-    width: 120px;
+    width: 140px;
+    flex-shrink: 0;
+}
+
+.whatsapp-group input {
+    flex: 1;
 }
 
 .checkbox-group {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
+    gap: 12px;
+    margin-top: 25px;
 }
 
 .checkbox-group input[type="checkbox"] {
-    width: auto;
-    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    flex-shrink: 0;
 }
 
 .checkbox-group label {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: 400;
     color: var(--text-dark);
+    line-height: 1.4;
 }
 
 .contact-form button {
     width: 100%;
-    margin-top: 15px;
-    padding: 12px;
-    font-size: 0.9rem;
+    margin-top: 25px;
+    padding: 18px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.contact-form button:hover {
+    background-color: #e64a19;
+    transform: translateY(-2px);
 }
 
 /* Testimonials Section */
@@ -918,45 +950,46 @@ footer .container {
     }
 
     /* Contact Section Mobile */
+    .contact-section {
+        padding: 60px 0;
+    }
+    
     .contact-section .container {
-        max-width: 100%;
-        padding: 0 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
         grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 0 20px;
     }
 
     .contact-text {
         text-align: center;
-        order: 1;
     }
 
     .contact-text h2 {
-        font-size: 1.8rem;
+        font-size: 2rem;
         margin-bottom: 15px;
     }
 
     .contact-text p {
-        font-size: 1rem;
-        margin-top: 10px;
+        font-size: 1.1rem;
     }
 
     .contact-form {
-        order: 2;
+        padding: 30px 25px;
+        margin: 0 auto;
         max-width: 100%;
-        margin-top: 0;
-        padding: 25px 20px;
     }
 
-    .agendamento {
-        text-align: center;
-        margin: 20px 0;
+    .form-group input,
+    .form-group select {
+        padding: 12px;
     }
 
-    .agendamento .btn-primary {
-        display: inline-block;
-        margin: 10px auto;
+    .whatsapp-group .input-group {
+        gap: 10px;
+    }
+
+    .whatsapp-group select {
+        width: 120px;
     }
 
     /* Testimonials Mobile */
@@ -1004,7 +1037,7 @@ footer .container {
     
     .contact-text h2 {
         font-size: 1.5rem;
-         margin-top: -60px;
+        margin-top: -60px;
     }
     
     .testimonials-section h2 {
@@ -1017,5 +1050,26 @@ footer .container {
     
     .person-with-card-img {
         width: 250px;
+    }
+    
+    .contact-section {
+        padding: 40px 0;
+    }
+    
+    .contact-text h2 {
+        font-size: 1.8rem;
+    }
+    
+    .contact-text p {
+        font-size: 1rem;
+    }
+    
+    .contact-form {
+        padding: 25px 20px;
+    }
+    
+    .form-group input,
+    .form-group select {
+        padding: 10px;
     }
 }
