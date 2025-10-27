@@ -980,6 +980,7 @@ footer .container {
 
     .footer-logo {
         justify-content: center;
+        margin-top: -40px;
     }
 
     .social-icons {
