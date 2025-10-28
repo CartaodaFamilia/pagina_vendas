@@ -128,7 +128,6 @@ body {
 
 /* Sections - Estilos gerais */
 .cadastro-section {
-    /* Não precisa de border-bottom, pois são passos separados */
     padding-bottom: 0;
     margin-bottom: 0;
 }
@@ -176,7 +175,6 @@ body {
     flex: 1; /* Ocupa 100% da linha, pois está sozinho */
 }
 
-
 .form-group label {
     display: block;
     font-size: 0.9rem;
@@ -223,7 +221,7 @@ body {
     word-break: break-word;
 }
 
-/* Checkbox Styles (mantidos) */
+/* Checkbox Styles */
 .checkbox-group {
     display: flex;
     align-items: flex-start;
@@ -252,6 +250,21 @@ body {
     font-weight: 600;
 }
 
+.checkbox-group a:hover {
+    text-decoration: underline;
+}
+
+/* Mensagens de Erro */
+.mensagem-erro {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    display: block;
+}
+
+.form-group input.error {
+    border-color: red;
+}
 
 /* Buttons */
 .btn-next, .btn-back {
@@ -296,60 +309,20 @@ body {
     transform: translateY(-2px);
 }
 
-/* Responsiveness */
-@media (max-width: 768px) {
-    .cadastro-container {
-        padding: 25px;
-    }
-
-    .progress-bar {
-        padding: 0;
-        justify-content: space-between;
-    }
-
-    /* Em mobile, todos os campos ficam em coluna */
-    .form-row {
-        flex-direction: column;
-        gap: 0;
-    }
-    
-    .form-group {
-        flex: 1 1 100%; /* Ocupa 100% da largura em mobile */
-        margin-bottom: 15px;
-    }
-    
-    /* Reseta as regras de largura específicas do desktop para a Rua/Número em mobile */
-    .form-step[data-step="2"] .form-row:nth-child(4) .form-group:first-child,
-    .form-step[data-step="2"] .form-row:nth-child(4) .form-group:last-child {
-        flex: 1 1 100%;
-    }
-    
-    .step .label {
-        font-size: 0.65rem;
-    }
-
-    /* --- ESTILOS PARA A MENSAGEM DE SUCESSO (MODAL) --- */
+/* --- ESTILOS PARA A MENSAGEM DE SUCESSO (MODAL) --- */
 .success-message {
-    /* Inicialmente escondida */
-    display: none; 
-    
-    /* Configuração de layout e centralização na tela */
-    position: fixed; 
+    display: none;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro */
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 2000;
-    
-    /* Centralização do conteúdo */
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    
-    /* Estilo do Card Central */
     padding: 40px 30px;
     box-sizing: border-box;
 }
@@ -369,7 +342,7 @@ body {
 
 .success-icon {
     font-size: 4rem;
-    color: #4CAF50; /* Verde de sucesso */
+    color: #4CAF50;
     margin-bottom: 20px;
     background-color: transparent !important;
     box-shadow: none !important;
@@ -399,7 +372,7 @@ body {
     font-size: 1.1rem;
     cursor: pointer;
     margin-top: 25px !important;
-    background-color: #4CAF50; /* Cor de sucesso */
+    background-color: #4CAF50;
     color: var(--white);
     transition: background-color 0.3s;
 }
@@ -410,12 +383,41 @@ body {
 
 /* Garante que o container original esteja visível para o JS escondê-lo */
 .cadastro-container {
-    /* Mantenha os estilos existentes aqui */
-    display: block; /* Garante que o JS possa escondê-lo */
+    display: block;
 }
 
-/* Media Query para garantir que a mensagem se adapte bem em mobile */
-@media (max-width: 600px) {
+/* Responsiveness */
+@media (max-width: 768px) {
+    .cadastro-container {
+        padding: 25px;
+    }
+
+    .progress-bar {
+        padding: 0;
+        justify-content: space-between;
+    }
+
+    /* Em mobile, todos os campos ficam em coluna */
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .form-group {
+        flex: 1 1 100%;
+        margin-bottom: 15px;
+    }
+    
+    /* Reseta as regras de largura específicas do desktop para a Rua/Número em mobile */
+    .form-step[data-step="2"] .form-row:nth-child(4) .form-group:first-child,
+    .form-step[data-step="2"] .form-row:nth-child(4) .form-group:last-child {
+        flex: 1 1 100%;
+    }
+    
+    .step .label {
+        font-size: 0.65rem;
+    }
+
     .success-icon {
         font-size: 3rem;
     }
@@ -425,5 +427,4 @@ body {
     .success-message p {
         font-size: 1rem;
     }
-}
 }

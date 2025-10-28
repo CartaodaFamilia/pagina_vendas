@@ -68,12 +68,12 @@
 
                     <div class="checkbox-group">
                         <input type="checkbox" id="termos" name="termos" required>
-                        <label for="termos">Li e aceito os <a href="#">termos e condições</a>, sou maior de 18 anos*</label>
+                        <label for="termos">Li e aceito os <a href="https://cartaodafamiliabr.com.br/termos-de-uso/" target="_blank">termos e condições</a>, sou maior de 18 anos*</label>
                     </div>
 
                     <div class="checkbox-group">
                         <input type="checkbox" id="comunicacao" name="comunicacao">
-                        <label for="comunicacao">Autorizo o envio de comunicações do Cartão da Família por canais digitais</label>
+                        <label for="comunicacao">Autorizo o envio de comunicações do Cartão da Família por canais digitais e estou ciente da <a href="https://cartaodafamiliabr.com.br/politica-de-privacidade/" target="_blank">política de privacidade</a></label>
                     </div>
                     
                     <button type="button" class="btn-next" data-next-step="2">Próximo passo</button>
@@ -192,15 +192,110 @@
             const displayCpf = document.getElementById('display-cpf');
             const whatsappInput = document.getElementById('whatsapp');
             const cepInput = document.getElementById('cep');
+            const emailInput = document.getElementById('email');
             const redirectUrlInput = document.getElementById('formspree-redirect-url');
 
             // Define a URL de redirecionamento do Formspree ao carregar a página
-            // Ele redirecionará para a própria página, mas com o parâmetro ?status=success
             const currentBaseUrl = window.location.href.split('?')[0];
             redirectUrlInput.value = currentBaseUrl + '?status=success';
 
+            // --- FUNÇÕES DE VALIDAÇÃO ---
 
-            // --- FUNÇÕES DE MÁSCARA (MANTIDAS) ---
+            // Validação de CPF
+            function validarCPF(cpf) {
+                cpf = cpf.replace(/[^\d]+/g, '');
+                
+                if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) {
+                    return false;
+                }
+                
+                let soma = 0;
+                let resto;
+                
+                for (let i = 1; i <= 9; i++) {
+                    soma = soma + parseInt(cpf.substring(i-1, i)) * (11 - i);
+                }
+                
+                resto = (soma * 10) % 11;
+                
+                if ((resto === 10) || (resto === 11)) {
+                    resto = 0;
+                }
+                
+                if (resto !== parseInt(cpf.substring(9, 10))) {
+                    return false;
+                }
+                
+                soma = 0;
+                
+                for (let i = 1; i <= 10; i++) {
+                    soma = soma + parseInt(cpf.substring(i-1, i)) * (12 - i);
+                }
+                
+                resto = (soma * 10) % 11;
+                
+                if ((resto === 10) || (resto === 11)) {
+                    resto = 0;
+                }
+                
+                if (resto !== parseInt(cpf.substring(10, 11))) {
+                    return false;
+                }
+                
+                return true;
+            }
+
+            // Validação de WhatsApp
+            function validarWhatsApp(whatsapp) {
+                const numeroLimpo = whatsapp.replace(/\D/g, '');
+                
+                if (numeroLimpo.length < 10 || numeroLimpo.length > 11) {
+                    return false;
+                }
+                
+                const ddd = numeroLimpo.substring(0, 2);
+                if (ddd < '11' || ddd > '99') {
+                    return false;
+                }
+                
+                return true;
+            }
+
+            // Validação de Email
+            function validarEmail(email) {
+                const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return regex.test(email);
+            }
+
+            // Função para mostrar erro no campo
+            function mostrarErro(campo, mensagem) {
+                const erroAnterior = campo.parentNode.querySelector('.mensagem-erro');
+                if (erroAnterior) {
+                    erroAnterior.remove();
+                }
+                
+                const mensagemErro = document.createElement('span');
+                mensagemErro.className = 'mensagem-erro';
+                mensagemErro.textContent = mensagem;
+                mensagemErro.style.color = 'red';
+                mensagemErro.style.fontSize = '0.8rem';
+                mensagemErro.style.marginTop = '5px';
+                mensagemErro.style.display = 'block';
+                
+                campo.parentNode.appendChild(mensagemErro);
+                campo.style.borderColor = 'red';
+            }
+
+            // Função para remover erro do campo
+            function removerErro(campo) {
+                const erroAnterior = campo.parentNode.querySelector('.mensagem-erro');
+                if (erroAnterior) {
+                    erroAnterior.remove();
+                }
+                campo.style.borderColor = '';
+            }
+
+            // --- FUNÇÕES DE MÁSCARA ---
             whatsappInput.addEventListener('input', function (e) {
                 e.target.value = e.target.value.replace(/\D/g, '')
                     .replace(/^(\d{2})(\d)/g,"($1) $2")
@@ -222,7 +317,42 @@
                     .replace(/(-\d{3})\d+?$/, '$1');
             });
 
-            // --- BUSCA DE CEP (MANTIDA) ---
+            // --- EVENT LISTENERS PARA VALIDAÇÃO EM TEMPO REAL ---
+
+            // Validação de CPF em tempo real
+            cpfInput.addEventListener('blur', function() {
+                const cpfValue = cpfInput.value.replace(/\D/g, '');
+                
+                if (cpfValue && !validarCPF(cpfInput.value)) {
+                    mostrarErro(cpfInput, 'CPF inválido. Por favor, verifique o número.');
+                } else {
+                    removerErro(cpfInput);
+                }
+            });
+
+            // Validação de WhatsApp em tempo real
+            whatsappInput.addEventListener('blur', function() {
+                const whatsappValue = whatsappInput.value;
+                
+                if (whatsappValue && !validarWhatsApp(whatsappValue)) {
+                    mostrarErro(whatsappInput, 'WhatsApp inválido. Verifique o número com DDD.');
+                } else {
+                    removerErro(whatsappInput);
+                }
+            });
+
+            // Validação de Email em tempo real
+            emailInput.addEventListener('blur', function() {
+                const emailValue = emailInput.value;
+                
+                if (emailValue && !validarEmail(emailValue)) {
+                    mostrarErro(emailInput, 'E-mail inválido. Verifique o formato (ex: nome@provedor.com).');
+                } else {
+                    removerErro(emailInput);
+                }
+            });
+
+            // --- BUSCA DE CEP ---
             cepInput.addEventListener('blur', function() {
                 const cep = cepInput.value.replace(/\D/g, '');
                 if (cep.length === 8) {
@@ -262,7 +392,6 @@
             // --- CONTROLE DE PASSOS (STEPS) ---
             const steps = document.querySelectorAll('.form-step');
             const progressSteps = document.querySelectorAll('.progress-bar .step');
-            // ... (Restante das variáveis)
             let currentStep = 1; 
 
             function updateProgress(step) {
@@ -270,10 +399,8 @@
                     const stepNum = parseInt(s.getAttribute('data-step'));
                     if (stepNum <= step) {
                         s.classList.add('active');
-                        // ... (Lógica de linha de progresso)
                     } else {
                         s.classList.remove('active');
-                        // ... (Lógica de linha de progresso)
                     }
                 });
             }
@@ -296,7 +423,7 @@
                 displayCpf.textContent = cpfInput.value;
             }
 
-            // Função de Validação do Passo Atual (CORRIGIDA)
+            // Função de Validação do Passo Atual
             function validateStep(stepNum) {
                 const validStepNum = parseInt(stepNum);
 
@@ -315,7 +442,7 @@
                 const requiredInputs = currentStepElement.querySelectorAll('[required]');
                 let isValid = true;
 
-                // Lógica de validação de campos obrigatórios (MANTIDA)
+                // Lógica de validação de campos obrigatórios
                 requiredInputs.forEach(input => {
                     if (input.type === 'checkbox' && !input.checked) {
                         isValid = false;
@@ -329,8 +456,32 @@
                     }
                 });
                 
+                // VALIDAÇÕES ESPECÍFICAS PARA O PASSO 1
+                if (validStepNum === 1 && isValid) {
+                    // Validação de CPF
+                    const cpfValue = cpfInput.value.replace(/\D/g, '');
+                    if (cpfValue && !validarCPF(cpfInput.value)) {
+                        isValid = false;
+                        mostrarErro(cpfInput, 'CPF inválido. Por favor, verifique o número.');
+                    }
+                    
+                    // Validação de WhatsApp
+                    const whatsappValue = whatsappInput.value;
+                    if (whatsappValue && !validarWhatsApp(whatsappValue)) {
+                        isValid = false;
+                        mostrarErro(whatsappInput, 'WhatsApp inválido. Verifique o número com DDD.');
+                    }
+                    
+                    // Validação de Email
+                    const emailValue = emailInput.value;
+                    if (emailValue && !validarEmail(emailValue)) {
+                        isValid = false;
+                        mostrarErro(emailInput, 'E-mail inválido. Verifique o formato (ex: nome@provedor.com).');
+                    }
+                }
+                
                 if (!isValid) {
-                    alert('Por favor, preencha todos os campos obrigatórios (*) deste passo.');
+                    alert('Por favor, preencha todos os campos obrigatórios (*) corretamente.');
                 }
                 return isValid;
             }
@@ -358,10 +509,7 @@
                 });
             });
 
-            // ATENÇÃO: SUBMISSÃO FINAL (type="submit") FOI REMOVIDA PARA EVITAR O CORS
-            // A validação final agora será feita no HTML nativo (required)
-            
-            // NOVO: Função para verificar e exibir a mensagem de sucesso na URL
+            // Função para verificar e exibir a mensagem de sucesso na URL
             function checkSuccessStatus() {
                 const urlParams = new URLSearchParams(window.location.search);
                 const status = urlParams.get('status');
@@ -369,40 +517,30 @@
                 const cadastroContainer = document.querySelector('.cadastro-container');
 
                 if (status === 'success') {
-                    // Esconde o container principal e mostra a mensagem de sucesso
                     cadastroContainer.style.display = 'none';
                     successMessage.style.display = 'flex';
                     
-                    // Opcional: Tenta pegar o nome do usuário do armazenamento (se foi salvo antes do redirecionamento)
-                    // Como não salvamos antes, vamos usar uma saudação genérica ou pegar o nome do formulário
                     const nomeFinal = document.getElementById('nome').value;
                     const nomeDisplay = nomeFinal.trim() !== '' ? nomeFinal : 'cliente';
                     
                     document.getElementById('success-text').innerHTML = `Parabéns, <strong>${nomeDisplay}</strong>! Seus dados foram enviados para o email tiprimefamilia@gmail.com.`;
                 
-                    // Limpar a URL para que a mensagem não reapareça em um recarregamento futuro
                     if (window.history.replaceState) {
                         window.history.replaceState(null, document.title, window.location.href.split('?')[0]);
                     }
                 } else {
-                    // Garante que o formulário está visível e começa no passo 1
                     cadastroContainer.style.display = 'block';
                     successMessage.style.display = 'none';
                     showStep(1); 
                 }
             }
             
-            // Ação para o botão 'Começar Novo Cadastro' na tela de Sucesso (MANTIDA)
+            // Ação para o botão 'Começar Novo Cadastro' na tela de Sucesso
             const returnToStartButton = document.getElementById('returnToStart');
             if (returnToStartButton) {
                 returnToStartButton.addEventListener('click', function() {
-                    // Esconde a mensagem de sucesso
                     document.getElementById('successMessage').style.display = 'none';
-                    
-                    // Exibe o container do formulário novamente
                     document.querySelector('.cadastro-container').style.display = 'block';
-
-                    // Limpa o formulário e volta ao primeiro passo
                     form.reset();
                     showStep(1);
                 });
